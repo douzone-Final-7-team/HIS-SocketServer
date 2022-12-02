@@ -37,12 +37,14 @@ io.on("connection", (socket)=>{
     socket.on("send_message", (data)=>{
        
         let changeStatData = data;
-        if(changeStatData.callStatus ===""){
-            changeStatData.callStatus  = '호출'
-        }
          //call_message id 를 가진 이벤트에 data를 방출
         socket.to(data.room).emit("call_message",changeStatData);
-
+        socket.to(data.admission).emit("admissionOrder",changeStatData);
+    })
+    
+    socket.on("send_emergencyMessage", (data)=>{
+        let emergency = data;
+        socket.to(data.room).emit("call_emergencyMessage",emergency);
     })   
 
     //sokect이 disconnect 이벤트를 감지하면 콘솔찍게함
