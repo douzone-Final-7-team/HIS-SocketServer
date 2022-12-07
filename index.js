@@ -13,8 +13,8 @@ const server = http.createServer(app);
 const io = new Server(server, {
     cors: {
         //origin: "http://192.168.0.183:3000", // 서버와 통신할 클라인언트 주소
-        origin: "http://localhost:3000",
-        methods:["GET","POST"]
+        origin: "*",
+        methods:["GET","POST"],
     }
 })
 
@@ -35,10 +35,11 @@ io.on("connection", (socket)=>{
 
     //send_message라는 id를 가진 이벤트를 감지해 data를 받고
     socket.on("send_message", (data)=>{
-       
         let changeStatData = data;
          //call_message id 를 가진 이벤트에 data를 방출
+         console.log(data)
         socket.to(data.room).emit("call_message",changeStatData);
+        socket.to(data.room).emit("call_message" + data.ward + "-" + data.roomNum + "-" + data.bedNum ,changeStatData);
         socket.to(data.admission).emit("admissionOrder",changeStatData);
     })
     
