@@ -38,7 +38,9 @@ io.on("connection", (socket)=>{
         
         let changeStatData = data;
          //call_message id 를 가진 이벤트에 data를 방출
+         console.log(data)
         socket.to(data.room).emit("call_message",changeStatData);
+        socket.to(data.room).emit("call_message" + data.ward + "-" + data.roomNum + "-" + data.bedNum ,changeStatData);
     })
 
     socket.on("send_admissionOrder", (data)=>{
