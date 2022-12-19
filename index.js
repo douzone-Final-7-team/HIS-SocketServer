@@ -13,7 +13,7 @@ const server = http.createServer(app);
 const io = new Server(server, {
     cors: {
         //origin: "http://192.168.0.183:3000", // 서버와 통신할 클라인언트 주소
-        origin: "http://192.168.0.195:3000",
+        origin: "http://myhisbucket.s3-website.ap-northeast-2.amazonaws.com",
         methods:["GET","POST"]
     }
 })
